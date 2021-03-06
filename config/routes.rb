@@ -40,10 +40,16 @@ Rails.application.routes.draw do
     get 'homes/top'
     get 'homes/about'
   end
-  devise_for :admins
+  devise_for :admins, controllers: {
+    session: 'admin/sessions'
+  }
+  
+  devise_scope :admin do
+    get 'admin/sign_in' => 'admin/sessions#new'
+  end
 
   devise_for :customers, controllers: {
-    registration: 'public/ragistration',
+    registration: 'public/ragistrations',
     session: 'public/sessions'
   }
   
