@@ -9,6 +9,75 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header class="container">
+    <div>
+      <div>
+        <nav>
+          <div>logo</div>
+    
+          <% if customer_signed_in? %>
+          <ul class="nav">
+            <li>
+              <%= link_to "マイページ"、%>
+              <i class="fas fa-house-user"></i>
+            </li>
+            <li>
+              <%= link_to "商品一覧", %>
+              <i class="fas fa-cheese"></i>
+            </li>
+            <li>
+              <%= link_to "カート", %>
+              <i class="fas fa-shopping-cart"></i>
+            </li>
+            <li>
+            <%= link_to "ログアウト", %>
+            <i class="fas fa-sign-out-alt"></i>
+            </li>
+          </ul>
+          <% else if adimin_signed_in? %>
+            <ul class="nav">
+            <li>
+              <%= link_to "商品一覧", %>
+              <i class="fas fa-cheese"></i>
+            </li>
+            <li>
+              <%= link_to "会員一覧", %>
+              <i class="fas fa-users"></i>
+            </li>
+            <li>
+              <%= link_to "ジャンル一覧", %>
+              <i class="far fa-list-alt"></i>
+            </li>
+            <li>
+              <%= link_to "ログアウト", %>
+              <i class="fas fa-sign-out-alt"></i>
+            </li>
+            </ul>
+    
+          <% else %>
+            <ul class="nav">
+              <li>
+                <%= link_to "About", %>
+                <i class="fab fa-readme"></i>
+              </li>
+              <li>
+                <%= link_to "商品一覧", %>
+                <i class="fas fa-cheese"></i>
+              </li>
+              <li>
+                <%= link_to "新規登録", %>
+                <i class="fas fa-file-signature"></i>
+              </li>
+              <li>
+                <%= link_to "ログイン", %>
+                <i class="fas fa-sign-in-alt"></i>
+              </li>
+            </ul>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+  </header>
   <body>
     <%= yield %>
   </body>
