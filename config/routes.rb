@@ -1,29 +1,48 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'admin' => 'admin/homes#top'
-    
-    resources :items, only: [:index, :create, :show, :edit, :update]
-    resources :genre, only: [:index, :create, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:index, :show]
+
+    get 'oders/index'
+    get 'oders/show'
   end
-  
+  namespace :admin do
+    get 'items/index'
+    get 'items/new'
+    get 'items/show'
+    get 'items/edit'
+  end
+  namespace :admin do
+    get 'customers/index'
+    get 'customers/edit'
+  end
+  namespace :admin do
+    get 'homes/top'
+  end
   namespace :public do
-    get '/' => 'public/homes#top'
-    get 'about' => 'public/homes#about'
-    
-    resources :items, only: [:index, :show,]
-    resources :customers, only: [:show, :edit, :update]
-    get 'customers/:id/status' => 'public/customers#status'
-    patch 'customers/:id' => 'public/customers#change'
-    resources :cart_items, only: [:index, :update,:destroy, :create]
-    delete 'cart_items' => 'public/cart_items#destroy_all'
-    resources :orders, only: [:new, :create, :show]
-    post '/orders/confirm' => 'public/orders#confirm'
-    get '/orders/decision' => 'public/orders#decision'
-    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    get 'addresses/index'
+    get 'addresses/edit'
   end
-  
+  namespace :public do
+    get 'orders/new'
+    get 'orders/index'
+    get 'orders/show'
+  end
+  namespace :public do
+    get 'cart_items/index'
+  end
+  namespace :public do
+    get 'customers/show'
+    get 'customers/edit'
+  end
+  namespace :public do
+    get 'items/index'
+    get 'items/show'
+  end
+  namespace :public do
+   
+    get 'homes/top'
+    get 'homes/about'
+
+  end
   devise_for :admins, controllers: {
     session: 'admin/sessions'
   }
