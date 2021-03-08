@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     get '/orders/decision' => 'public/orders#decision'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-  
   devise_for :admins, controllers: {
     session: 'admin/sessions'
   }
