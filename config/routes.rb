@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   namespace :admin do
-    get 'admin' => 'admin/homes#top'
+    get 'admin' => 'homes#top'
     
     resources :items, only: [:index, :create, :show, :edit, :update]
     resources :genre, only: [:index, :create, :edit, :update]
@@ -9,24 +9,26 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
   
-  namespace :public do
-    get '/' => 'public/homes#top'
-    get 'about' => 'public/homes#about'
-    
+  
+   get '/' => 'public/homes#top'
+   get 'about' => 'public/homes#about'
+  
+  scope module: 'public' do
     resources :items, only: [:index, :show,]
     resources :customers, only: [:show, :edit, :update]
-    get 'customers/:id/status' => 'public/customers#status'
-    patch 'customers/:id' => 'public/customers#change'
+    get 'customers/:id/status' => 'customers#status'
+    patch 'customers/:id' => 'customers#change'
     resources :cart_items, only: [:index, :update,:destroy, :create]
-    delete 'cart_items' => 'public/cart_items#destroy_all'
+    delete 'cart_items' => 'cart_items#destroy_all'
     resources :orders, only: [:new, :create, :show]
-    post '/orders/confirm' => 'public/orders#confirm'
-    get '/orders/decision' => 'public/orders#decision'
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/decision' => 'orders#decision'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
   
   devise_for :admins, controllers: {
-    session: 'admin/sessions'
+    sessions: 'admin/sessions',
+    registrations: 'admin/registrations'
   }
   
   devise_scope :admin do
@@ -34,8 +36,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :customers, controllers: {
-    registration: 'public/ragistrations',
-    session: 'public/sessions'
+    registrations: 'public/ragistrations',
+    sessions: 'public/sessions'
   }
   
   devise_scope :customer do 
