@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
+
     get 'oders/index'
     get 'oders/show'
   end
@@ -37,8 +38,10 @@ Rails.application.routes.draw do
     get 'items/show'
   end
   namespace :public do
+   
     get 'homes/top'
     get 'homes/about'
+
   end
   devise_for :admins, controllers: {
     session: 'admin/sessions'
