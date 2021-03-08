@@ -4,73 +4,47 @@
     <title>NaganoCake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <script src="https://kit.fontawesome.com/6b92dd2514.js" crossorigin="anonymous"></script>
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <header class="container">
     <div>
       <div>
-        <nav>
-          <div>logo</div>
+        <nav class="navbar">
+          <div class="text-white">logo</div>
     
           <% if customer_signed_in? %>
-          <ul class="nav">
-            <li>
-              <%= link_to "マイページ"、%>
-              <i class="fas fa-house-user"></i>
-            </li>
-            <li>
-              <%= link_to "商品一覧", %>
-              <i class="fas fa-cheese"></i>
-            </li>
-            <li>
-              <%= link_to "カート", %>
-              <i class="fas fa-shopping-cart"></i>
-            </li>
-            <li>
-            <%= link_to "ログアウト", %>
-            <i class="fas fa-sign-out-alt"></i>
-            </li>
-          </ul>
-          <% else if adimin_signed_in? %>
-            <ul class="nav">
-            <li>
-              <%= link_to "商品一覧", %>
-              <i class="fas fa-cheese"></i>
-            </li>
-            <li>
-              <%= link_to "会員一覧", %>
-              <i class="fas fa-users"></i>
-            </li>
-            <li>
-              <%= link_to "ジャンル一覧", %>
-              <i class="far fa-list-alt"></i>
-            </li>
-            <li>
-              <%= link_to "ログアウト", %>
-              <i class="fas fa-sign-out-alt"></i>
-            </li>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <%= link_to customer_path, class: "nav-link" do %>
+                  <i class="fas fa-house-user"></i>　マイページ
+                <% end %>
+              </li>
             </ul>
-    
           <% else %>
-            <ul class="nav">
-              <li>
-                <%= link_to "About", %>
-                <i class="fab fa-readme"></i>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <%= link_to about_path, class: "nav-link" do %>
+                  <i class="fab fa-readme"></i>　About
+                <% end %>
               </li>
-              <li>
-                <%= link_to "商品一覧", %>
-                <i class="fas fa-cheese"></i>
+              <li class="nav-item">
+                <%= link_to items_path, class: "nav-link" do %>
+                  <i class="fas fa-cheese"></i> 商品一覧
+                <% end %>
               </li>
-              <li>
-                <%= link_to "新規登録", %>
-                <i class="fas fa-file-signature"></i>
+              <li class="nav-item">
+                <%= link_to new_customer_registration_path, class: "nav-link" do %>
+                  <i class="fas fa-file-signature"></i> 新規登録
+                <% end %>
               </li>
-              <li>
-                <%= link_to "ログイン", %>
-                <i class="fas fa-sign-in-alt"></i>
+              <li class="nav-item">
+                <%= link_to new_customer_session_path, class: "nav-link" do %>
+                  <i class="fas fa-sign-in-alt"></i> ログイン
+                <% end %>
               </li>
             </ul>
           <% end %>
