@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
+
+# User.create!(username:  "管理者",
+#             email: "admin@example.jp",
+#             password:  "11111111",
+#             password_confirmation: "11111111",
+#             admin: true)
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions',
+    registrations: 'admin/registrations'
+  }
+
+  devise_for :customers, controllers: {
+    registrations: 'public/ragistrations',
+    sessions: 'public/sessions'
+  }
+
   namespace :admin do
     get '/top' => 'homes#top'
     
@@ -11,6 +29,7 @@ Rails.application.routes.draw do
   
   
    get '/' => 'public/homes#top'
+   root to: "public/homes#tp"
    get 'about' => 'public/homes#about'
   
   scope module: 'public' do
@@ -25,24 +44,5 @@ Rails.application.routes.draw do
     get '/orders/decision' => 'orders#decision'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-  
-  devise_for :admins, controllers: {
-    sessions: 'admin/sessions',
-    registrations: 'admin/registrations'
-  }
-  
-  devise_scope :admin do
-    get 'admin/sign_in' => 'admin/sessions#new'
-  end
 
-  devise_for :customers, controllers: {
-    registrations: 'public/ragistrations',
-    sessions: 'public/sessions'
-  }
-  
-  devise_scope :customer do 
-    get 'customer/sign_up' => 'public/registrations#new'
-    get 'customer/sign_in' => 'public/sessions#new'
-  end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
